@@ -1,5 +1,6 @@
 import React from 'react';
 import { monthsEn, monthsPt } from './months';
+import { getNumberOfDay } from './utils';
 import './styles.css';
 
 const ReactCalendar = () => {
@@ -12,9 +13,19 @@ const ReactCalendar = () => {
     const days = [];
     const firstDay = new Date(`1 ${monthsEn[currentMonth]}, ${currentYear}`).getDay();
 
-    for(let i = 0; i < firstDay; i += 1) {
-      days.push();
+    const prevMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+    const yearOfPrevMonth = prevMonth === 11 ? currentYear - 1 : currentYear;
+
+    for(let i = firstDay - 1; i >= 0; i -= 1) {
+      days.push(getNumberOfDay(prevMonth, yearOfPrevMonth) - i);
     }
+
+    for(let i = 1; i <= getNumberOfDay(currentMonth, currentYear); i += 1) {
+      days.push(i);
+    }
+    
+    console.log(days);
+    
   }, []);
 
   return (
