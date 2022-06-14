@@ -1,0 +1,24 @@
+.calendarContainer {
+  width: 400px;
+}
+
+.calendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calendarContent {
+  
+}
+
+.calendarContentHeader {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: center;
+  justify-items: center;
+}
+
+.calendarContentHeader p {
+  
+}
