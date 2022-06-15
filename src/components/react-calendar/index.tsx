@@ -8,6 +8,7 @@ const ReactCalendar = () => {
   const [currentMonth, setCurrentMonth] = React.useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = React.useState(new Date().getFullYear());
   const [monthDays, setMonthDays] = React.useState([]);
+  const [state, setState] = React.useState<any>();
 
   React.useEffect(() => {
     const days = [];
@@ -23,15 +24,21 @@ const ReactCalendar = () => {
     for(let i = 1; i <= getNumberOfDay(currentMonth, currentYear); i += 1) {
       days.push(i);
     }
+
+    for(let i = 1; i <= 42 - (getNumberOfDay(currentMonth, currentYear) + firstDay); i += 1) {
+      days.push(i);
+    }
     
-    console.log(days);
+    setState(days);
     
-  }, []);
+  }, [currentMonth]);
+
+  console.log(currentMonth, state);
 
   return (
     <div className="calendarContainer">
       <div className="calendarHeader">
-        <button>&#8249;</button>
+        <button onClick={() => setCurrentMonth(currentMonth - 1)}>&#8249;</button>
         <div>
           <button>{currentMonth}</button>
           <button>{currentYear}</button>
