@@ -13,7 +13,7 @@ const ReactCalendar = () => {
       setCurrentYear(currentYear - 1);
       setCurrentMonth(11);
     } else {
-      setCurrentMonth(currentMonth - 1)
+      setCurrentMonth(currentMonth - 1);
     }
   };
 
@@ -24,6 +24,14 @@ const ReactCalendar = () => {
     } else {
       setCurrentMonth(currentMonth + 1)
     }
+  };
+
+  const goToPrevYear = () => {
+    setCurrentYear(currentYear - 1);
+  };
+
+  const goToNextYear = () => {
+    setCurrentYear(currentYear + 1);
   };
 
   React.useEffect(() => {
@@ -50,27 +58,35 @@ const ReactCalendar = () => {
     
     setMonthDays(days);
     
-  }, [currentMonth]);
+  }, [currentMonth, currentYear]);
 
   return (
     <div className="calendarContainer">
       <div className="calendarHeader">
-        <button onClick={goToPrevMonth}>&#8249;</button>
-        <div>
-          <button>{months.pt[currentMonth]}</button>
-          <button>{currentYear}</button>
+        <div className="calendarDateDiv">
+          <button onClick={goToPrevMonth} className="arrowButton" type="button">&#8249;</button>
+          <div>
+            <button className="dateButton" type="button">{months.pt[currentMonth]}</button>
+          </div>
+          <button onClick={goToNextMonth} className="arrowButton" type="button">&#8250;</button>
         </div>
-        <button onClick={goToNextMonth}>&#8250;</button>
+        <div className="calendarDateDiv">
+          <button onClick={goToPrevYear} className="arrowButton" type="button">&#8249;</button>
+          <div>
+            <button className="dateButton" type="button">{currentYear}</button>
+          </div>
+          <button onClick={goToNextYear} className="arrowButton" type="button">&#8250;</button>
+        </div>
       </div>
       <div className="calendarContent">
         <div className="grid">
           {weekDays.pt.map((day: string, index: number) => (
-            <p key={index}>{day}</p>
+            <div key={index} className="weekDay">{day}</div>
           ))}
         </div>
         <div className="grid">
           {monthDays.map((day: number, index: number) => (
-            <p key={index}>{formatMonthDay(day)}</p>
+            <button key={index} className="monthDay" type="button">{formatMonthDay(day)}</button>
           ))}
         </div>
       </div>
