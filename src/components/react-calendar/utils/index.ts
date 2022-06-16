@@ -1,3 +1,55 @@
+export const weekDays = {
+  en: [
+    'S',
+    'M',
+    'T',
+    'W',
+    'T',
+    'F',
+    'S',
+  ],
+  pt: [
+    'D',
+    'S',
+    'T',
+    'Q',
+    'Q',
+    'S',
+    'S',
+  ],
+};
+
+export const months = {
+  en: [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ],
+  pt: [
+    'Janeiro',
+    'Fevereiro',
+    'Março',
+    'Abril',
+    'Maio',
+    'Junho',
+    'Julho',
+    'Agosto',
+    'Setembro',
+    'Outubro',
+    'Novembro',
+    'Dezembro',
+  ],
+};
+
 export const getNumberOfDay = (month: number, year: number) => {
   const days31 = [0, 2, 4, 6, 7, 9, 11];
   const days30 = [3, 5, 8, 10, 12];
@@ -12,4 +64,9 @@ export const getNumberOfDay = (month: number, year: number) => {
     return 29;
   }
   return 28;
+};
+
+export const formatMonthDay = (monthDay: number) => {
+  if(monthDay < 10) return `0${monthDay}`
+  return `${monthDay}`;
 };
