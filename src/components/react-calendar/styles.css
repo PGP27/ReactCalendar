@@ -69,4 +69,9 @@ button:hover {
 .monthDay {
   height: 30px;
   width: 30px;
+  color: #707070;
+}
+
+.currentMonthDay {
+  color: #000000;
 }

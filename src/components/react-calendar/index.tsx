@@ -6,7 +6,9 @@ const ReactCalendar = () => {
   const [currentDay, setCurrentDay] = React.useState(new Date().getDate());
   const [currentMonth, setCurrentMonth] = React.useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = React.useState(new Date().getFullYear());
-  const [monthDays, setMonthDays] = React.useState<any>([]);
+  const [prevMonthDays, setPrevMonthDays] = React.useState<any>([]);
+  const [currentMonthDays, setCurrentMonthDays] = React.useState<any>([]);
+  const [nextMonthDays, setNextMonthDays] = React.useState<any>([]);
 
   const goToPrevMonth = () => {
     if(currentMonth === 0) {
@@ -44,19 +46,24 @@ const ReactCalendar = () => {
     if(firstDay === 0) {
       firstDay = 7;
     }
+
+    const prevDays = [];
     for(let i = firstDay - 1; i >= 0; i -= 1) {
-      days.push(getNumberOfDay(prevMonth, yearOfPrevMonth) - i);
+      prevDays.push(getNumberOfDay(prevMonth, yearOfPrevMonth) - i);
     }
+    setPrevMonthDays(prevDays);
 
+    const currentDays = [];
     for(let i = 1; i <= getNumberOfDay(currentMonth, currentYear); i += 1) {
-      days.push(i);
+      currentDays.push(i);
     }
+    setCurrentMonthDays(currentDays);
 
+    const nextDays = [];
     for(let i = 1; i <= 42 - (getNumberOfDay(currentMonth, currentYear) + firstDay); i += 1) {
-      days.push(i);
+      nextDays.push(i);
     }
-    
-    setMonthDays(days);
+    setNextMonthDays(nextDays);
     
   }, [currentMonth, currentYear]);
 
@@ -85,8 +92,14 @@ const ReactCalendar = () => {
           ))}
         </div>
         <div className="grid">
-          {monthDays.map((day: number, index: number) => (
-            <button key={index} className="monthDay" type="button">{formatMonthDay(day)}</button>
+          {prevMonthDays.map((day: number, index: number) => (
+            <button onClick={goToPrevMonth} key={index} className="monthDay" type="button">{formatMonthDay(day)}</button>
+          ))}
+          {currentMonthDays.map((day: number, index: number) => (
+            <button key={index} className="monthDay currentMonthDay" type="button">{formatMonthDay(day)}</button>
+          ))}
+          {nextMonthDays.map((day: number, index: number) => (
+            <button onClick={goToNextMonth} key={index} className="monthDay" type="button">{formatMonthDay(day)}</button>
           ))}
         </div>
       </div>
