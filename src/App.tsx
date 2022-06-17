@@ -1,7 +1,7 @@
 import ReactCalendar from "./components/react-calendar";
 
 const App = () => (
-  <ReactCalendar />
+  <ReactCalendar onChange={(e: any) => console.log(e)} />
 );
 
 export default App;
