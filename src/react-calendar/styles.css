@@ -50,7 +50,20 @@ button:not(.currentDay):hover {
   margin: 0 0.5rem;
 }
 
-.grid {
+.dateOption {
+  height: 30px;
+  width: 100%;
+  font-size: 14px;
+}
+
+.grid4 {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+}
+
+.grid7 {
   height: fit-content;
   width: fit-content;
   display: grid;
