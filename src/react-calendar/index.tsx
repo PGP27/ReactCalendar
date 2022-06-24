@@ -4,16 +4,24 @@ import chevronLeft from "./assets/chevron_left.svg";
 import chevronRight from "./assets/chevron_right.svg";
 import './styles.css';
 
-const ReactCalendar = ({ onChange }: any) => {
-  const [currentDay, setCurrentDay] = React.useState(new Date().getDate());
-  const [currentMonth, setCurrentMonth] = React.useState(new Date().getMonth());
-  const [currentYear, setCurrentYear] = React.useState(new Date().getFullYear());
+interface ReactCalendarProps {
+  value?: Date,
+  lang?: 'en' | 'pt',
+  onChange?: (date: Date) => any,
+};
+
+const ReactCalendar = ({ value, lang, onChange }: ReactCalendarProps) => {
+  const [currentDay, setCurrentDay] = React.useState(value ? value?.getDate() : new Date().getDate());
+  const [currentMonth, setCurrentMonth] = React.useState(value ? value?.getMonth() : new Date().getMonth());
+  const [currentYear, setCurrentYear] = React.useState(value ? value?.getFullYear() : new Date().getFullYear());
   const [prevMonthDays, setPrevMonthDays] = React.useState<any>([]);
   const [currentMonthDays, setCurrentMonthDays] = React.useState<any>([]);
   const [nextMonthDays, setNextMonthDays] = React.useState<any>([]);
   const [showMonths, setShowMonths] = React.useState<boolean>(false);
   const [showYears, setShowYears] = React.useState<boolean>(false);
   const [yearsToShow, setYearsToShow] = React.useState<any>();
+  
+  const selectedLang = React.useMemo(() => lang || 'en', []);
 
   const goToPrevMonth = () => {
     if(currentMonth === 0) {
@@ -110,11 +118,9 @@ const ReactCalendar = ({ onChange }: any) => {
   React.useEffect(() => {
     const lastDay = getNumberOfDay(currentMonth, currentYear);
     if(lastDay < currentDay) setCurrentDay(lastDay);
-    onChange({
-      day: currentDay,
-      month: months.pt[currentMonth],
-      year: currentYear,
-    });
+    if(onChange) {
+      onChange(new Date(`${currentYear} ${months.en[currentMonth]} ${currentDay}`));
+    }
   }, [currentDay, currentMonth, currentYear]);
 
   return (
@@ -133,7 +139,7 @@ const ReactCalendar = ({ onChange }: any) => {
           <button onClick={goToPrevMonth} className="arrowButton" type="button">
             <img src={chevronLeft} alt="Go to prev month" />
           </button>
-          <button onClick={() => showMonthOrYear('month')} className="dateButton" type="button">{months.pt[currentMonth]}</button>
+          <button onClick={() => showMonthOrYear('month')} className="dateButton" type="button">{months[`${selectedLang}`][currentMonth]}</button>
           <button onClick={goToNextMonth} className="arrowButton" type="button">
           <img src={chevronRight} alt="Go to next month" />
           </button>
@@ -143,7 +149,7 @@ const ReactCalendar = ({ onChange }: any) => {
         {showMonths && !showYears && (
           <div className="grid4">
             {
-              months.pt.map((month, index) => (
+              months[`${selectedLang}`].map((month, index) => (
                 <button onClick={() => selectDate('month', index)} key={month} className="dateOption">{month.substring(0, 3)}</button>
               ))
             }
@@ -161,7 +167,7 @@ const ReactCalendar = ({ onChange }: any) => {
         {!showMonths && !showYears && (
           <>
             <div className="grid7">
-              {weekDays.pt.map((day: string, index: number) => (
+              {weekDays[`${selectedLang}`].map((day: string, index: number) => (
                 <div key={index} className="weekDay">{day}</div>
               ))}
             </div>
