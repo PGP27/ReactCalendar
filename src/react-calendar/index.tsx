@@ -108,7 +108,7 @@ const ReactCalendar = ({ value, lang, onChange }: ReactCalendarProps) => {
     setNextMonthDays(nextDays);
 
     const years = [];
-    for(let i = currentYear - 99; i <= currentYear + 100; i += 1) {
+    for(let i = currentYear - 50; i <= currentYear + 51; i += 1) {
       years.push(i);
     }
     setYearsToShow(years);
@@ -127,27 +127,27 @@ const ReactCalendar = ({ value, lang, onChange }: ReactCalendarProps) => {
     <div className="calendarContainer">
       <div className="calendarHeader">
         <div className="calendarDateDiv">
-          <button onClick={goToPrevYear} className="arrowButton" type="button">
+          <button disabled={showMonths || showYears} onClick={goToPrevYear} className="arrowButton" type="button">
             <img src={chevronLeft} alt="Go to prev year" />
           </button>
           <button onClick={() => showMonthOrYear('year')} className="dateButton" type="button">{currentYear}</button>
-          <button onClick={goToNextYear} className="arrowButton" type="button">
+          <button disabled={showMonths || showYears} onClick={goToNextYear} className="arrowButton" type="button">
             <img src={chevronRight} alt="Go to next year" />
           </button>
         </div>
         <div className="calendarDateDiv">
-          <button onClick={goToPrevMonth} className="arrowButton" type="button">
+          <button disabled={showMonths || showYears} onClick={goToPrevMonth} className="arrowButton" type="button">
             <img src={chevronLeft} alt="Go to prev month" />
           </button>
           <button onClick={() => showMonthOrYear('month')} className="dateButton" type="button">{months[`${selectedLang}`][currentMonth]}</button>
-          <button onClick={goToNextMonth} className="arrowButton" type="button">
+          <button disabled={showMonths || showYears} onClick={goToNextMonth} className="arrowButton" type="button">
           <img src={chevronRight} alt="Go to next month" />
           </button>
         </div>
       </div>
       <div className="calendarContent">
         {showMonths && !showYears && (
-          <div className="grid4">
+          <div className="dateOptionsGrid">
             {
               months[`${selectedLang}`].map((month, index) => (
                 <button onClick={() => selectDate('month', index)} key={month} className="dateOption">{month.substring(0, 3)}</button>
@@ -156,7 +156,7 @@ const ReactCalendar = ({ value, lang, onChange }: ReactCalendarProps) => {
           </div>
         )}
         {showYears && !showMonths && (
-          <div className="grid4">
+          <div className="dateOptionsGrid">
             {
               yearsToShow.map((year: number) => (
                 <button onClick={() => selectDate('year', year)} key={year} className="dateOption">{year}</button>
@@ -166,12 +166,12 @@ const ReactCalendar = ({ value, lang, onChange }: ReactCalendarProps) => {
         )}
         {!showMonths && !showYears && (
           <>
-            <div className="grid7">
+            <div className="weekDaysGrid">
               {weekDays[`${selectedLang}`].map((day: string, index: number) => (
                 <div key={index} className="weekDay">{day}</div>
               ))}
             </div>
-            <div className="grid7">
+            <div className="monthDaysGrid">
               {prevMonthDays.map((day: number, index: number) => (
                 <button onClick={() => handleChangeDay('prev', day)} key={index} className="monthDay" type="button">{formatMonthDay(day)}</button>
               ))}

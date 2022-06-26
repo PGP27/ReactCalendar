@@ -11,22 +11,23 @@ button:not(.currentDay):hover {
 }
 
 .calendarContainer {
-  width: 210px;
+  height: fit-content;
+  width: fit-content;
   border-radius: 4px;
-  padding: 0.5rem;
   box-shadow: 0 0 2px;
+  padding: 0.5rem;
 }
 
 .calendarHeader {
   display: flex;
   flex-direction: column;
+  gap: 4px;
 }
 
 .calendarDateDiv {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 4px;
 }
 
 .arrowButton {
@@ -39,6 +40,10 @@ button:not(.currentDay):hover {
   box-shadow: 0 0 2px;
 }
 
+.arrowButton:disabled {
+  cursor: not-allowed;
+}
+
 .arrowButton img {
   height: 1rem;
 }
@@ -47,42 +52,72 @@ button:not(.currentDay):hover {
   border-radius: 100px;
   font-size: 0.875rem;
   padding: 0.25rem 0.625rem;
-  margin: 0 0.5rem;
 }
 
 .dateOption {
-  height: 30px;
+  min-height: 42.8px;
+  max-height: 100%;
   width: 100%;
   font-size: 14px;
 }
 
-.grid4 {
-  width: 100%;
+.dateOptionsGrid {
+  height: 214px;
+  width: 210px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   justify-items: center;
+  margin-top: 0.25rem;
+  overflow-y: scroll;
 }
 
-.grid7 {
-  height: fit-content;
-  width: fit-content;
+.dateOptionsGrid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dateOptionsGrid::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 100px;
+}
+ 
+.dateOptionsGrid::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 100px;
+}
+
+.dateOptionsGrid::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.weekDaysGrid {
+  height: 30px;
+  width: 210px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-items: center;
+  margin: 0.25rem 0;
+}
+
+.monthDaysGrid {
+  height: 180px;
+  width: 210px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   justify-items: center;
 }
 
 .weekDay {
-  width: 30px;
+  height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #707070;
-  margin: 0.5rem 0;
 }
 
 .monthDay {
-  height: 30px;
-  width: 30px;
+  height: 100%;
+  width: 100%;
   color: #707070;
 }
 
