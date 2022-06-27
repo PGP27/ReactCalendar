@@ -1,16 +1,20 @@
 import React from 'react';
 import { weekDays, months, getNumberOfDay, formatMonthDay } from './utils';
-import chevronLeft from "./assets/chevron_left.svg";
-import chevronRight from "./assets/chevron_right.svg";
+import chevronLeft from './assets/chevron_left.svg';
+import chevronRight from './assets/chevron_right.svg';
+import { CSSProperties } from 'react'; 
 import './styles.css';
 
 interface ReactCalendarProps {
   value?: Date,
   lang?: 'en' | 'pt',
   onChange?: (date: Date) => any,
+  style?: {
+    container: CSSProperties,
+  }
 };
 
-const ReactCalendar = ({ value, lang, onChange }: ReactCalendarProps) => {
+const ReactCalendar = ({ value, lang, onChange, style }: ReactCalendarProps) => {
   const [currentDay, setCurrentDay] = React.useState(value ? value?.getDate() : new Date().getDate());
   const [currentMonth, setCurrentMonth] = React.useState(value ? value?.getMonth() : new Date().getMonth());
   const [currentYear, setCurrentYear] = React.useState(value ? value?.getFullYear() : new Date().getFullYear());
@@ -21,7 +25,7 @@ const ReactCalendar = ({ value, lang, onChange }: ReactCalendarProps) => {
   const [showYears, setShowYears] = React.useState<boolean>(false);
   const [yearsToShow, setYearsToShow] = React.useState<any>();
   
-  const selectedLang = React.useMemo(() => lang || 'en', []);
+  const selectedLang = React.useMemo(() => lang || 'en', [lang]);
 
   const goToPrevMonth = () => {
     if(currentMonth === 0) {
@@ -79,7 +83,6 @@ const ReactCalendar = ({ value, lang, onChange }: ReactCalendarProps) => {
   };
 
   React.useEffect(() => {
-    const days = [];
     let firstDay = new Date(`1 ${months.en[currentMonth]}, ${currentYear}`).getDay();
 
     const prevMonth = currentMonth === 0 ? 11 : currentMonth - 1;
@@ -121,10 +124,10 @@ const ReactCalendar = ({ value, lang, onChange }: ReactCalendarProps) => {
     if(onChange) {
       onChange(new Date(`${currentYear} ${months.en[currentMonth]} ${currentDay}`));
     }
-  }, [currentDay, currentMonth, currentYear]);
+  }, [currentDay, currentMonth, currentYear, onChange]);
 
   return (
-    <div className="calendarContainer">
+    <div className="calendarContainer" style={style?.container}>
       <div className="calendarHeader">
         <div className="calendarDateDiv">
           <button disabled={showMonths || showYears} onClick={goToPrevYear} className="arrowButton" type="button">

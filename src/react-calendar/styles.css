@@ -68,7 +68,7 @@ button:not(.currentDay):hover {
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   margin-top: 0.25rem;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .dateOptionsGrid::-webkit-scrollbar {
