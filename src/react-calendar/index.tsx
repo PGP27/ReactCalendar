@@ -8,7 +8,7 @@ import './styles.css';
 interface ReactCalendarProps {
   value?: Date,
   lang?: 'en' | 'pt',
-  onChange?: (date: Date) => any,
+  onChange?: (value: Date) => void;
   style?: {
     container: CSSProperties,
   }

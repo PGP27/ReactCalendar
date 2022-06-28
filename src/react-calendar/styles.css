@@ -6,7 +6,7 @@ button {
   transition: 0.1s all;
 }
 
-button:not(.currentDay):hover {
+button:not(.react-super-calendar-current-day):hover {
   background-color: #EEEEEE;
 }
 
@@ -55,8 +55,8 @@ button:not(.currentDay):hover {
 }
 
 .react-super-calendar-month-year-grid {
-  height: 214px;
-  width: 210px;
+  height: calc((7 * 30px) + 4);
+  width: calc(7 * 30px);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
@@ -90,8 +90,8 @@ button:not(.currentDay):hover {
 }
 
 .react-super-calendar-week-days-grid {
-  height: 30px;
-  width: 210px;
+  height: calc(1 * 30px);
+  width: calc(7 * 30px);
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   justify-items: center;
@@ -108,8 +108,8 @@ button:not(.currentDay):hover {
 }
 
 .react-super-calendar-month-days-grid {
-  height: 180px;
-  width: 210px;
+  height: calc(6 * 30px);
+  width: calc(7 * 30px);
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   justify-items: center;
