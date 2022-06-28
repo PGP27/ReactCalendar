@@ -10,7 +10,7 @@ button:not(.currentDay):hover {
   background-color: #EEEEEE;
 }
 
-.calendarContainer {
+.react-super-calendar-container {
   height: fit-content;
   width: fit-content;
   border-radius: 4px;
@@ -18,19 +18,25 @@ button:not(.currentDay):hover {
   padding: 0.5rem;
 }
 
-.calendarHeader {
+.react-super-calendar-header {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.calendarDateDiv {
+.react-super-calendar-month-year-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.arrowButton {
+.react-super-calendar-month-year-button {
+  border-radius: 100px;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.625rem;
+}
+
+.react-super-calendar-arrow-button {
   height: 20px;
   width: 20px;
   display: flex;
@@ -40,28 +46,15 @@ button:not(.currentDay):hover {
   box-shadow: 0 0 2px;
 }
 
-.arrowButton:disabled {
+.react-super-calendar-arrow-button:disabled {
   cursor: not-allowed;
 }
 
-.arrowButton img {
+.react-super-calendar-arrow-button img {
   height: 1rem;
 }
 
-.dateButton {
-  border-radius: 100px;
-  font-size: 0.875rem;
-  padding: 0.25rem 0.625rem;
-}
-
-.dateOption {
-  min-height: 42.8px;
-  max-height: 100%;
-  width: 100%;
-  font-size: 14px;
-}
-
-.dateOptionsGrid {
+.react-super-calendar-month-year-grid {
   height: 214px;
   width: 210px;
   display: grid;
@@ -71,25 +64,32 @@ button:not(.currentDay):hover {
   overflow-y: auto;
 }
 
-.dateOptionsGrid::-webkit-scrollbar {
+.react-super-calendar-month-year-grid::-webkit-scrollbar {
   width: 8px;
 }
 
-.dateOptionsGrid::-webkit-scrollbar-track {
+.react-super-calendar-month-year-grid::-webkit-scrollbar-track {
   background: #f5f5f5;
   border-radius: 100px;
 }
  
-.dateOptionsGrid::-webkit-scrollbar-thumb {
+.react-super-calendar-month-year-grid::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 100px;
 }
 
-.dateOptionsGrid::-webkit-scrollbar-thumb:hover {
+.react-super-calendar-month-year-grid::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
 
-.weekDaysGrid {
+.react-super-calendar-month-year-grid-button {
+  min-height: 42.8px;
+  max-height: 100%;
+  width: 100%;
+  font-size: 14px;
+}
+
+.react-super-calendar-week-days-grid {
   height: 30px;
   width: 210px;
   display: grid;
@@ -98,15 +98,7 @@ button:not(.currentDay):hover {
   margin: 0.25rem 0;
 }
 
-.monthDaysGrid {
-  height: 180px;
-  width: 210px;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  justify-items: center;
-}
-
-.weekDay {
+.react-super-calendar-week-day {
   height: 100%;
   width: 100%;
   display: flex;
@@ -115,17 +107,25 @@ button:not(.currentDay):hover {
   color: #707070;
 }
 
-.monthDay {
+.react-super-calendar-month-days-grid {
+  height: 180px;
+  width: 210px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-items: center;
+}
+
+.react-super-calendar-month-day {
   height: 100%;
   width: 100%;
   color: #707070;
 }
 
-.currentMonthDay {
+.react-super-calendar-current-month-days {
   color: #000000;
 }
 
-.currentDay {
+.react-super-calendar-current-day {
   background-color: #2060ff;
   color: white;
 }

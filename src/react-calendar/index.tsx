@@ -14,6 +14,8 @@ interface ReactCalendarProps {
   }
 };
 
+const className = 'react-super-calendar';
+
 const ReactCalendar = ({ value, lang, onChange, style }: ReactCalendarProps) => {
   const [currentDay, setCurrentDay] = React.useState(value ? value?.getDate() : new Date().getDate());
   const [currentMonth, setCurrentMonth] = React.useState(value ? value?.getMonth() : new Date().getMonth());
@@ -127,69 +129,69 @@ const ReactCalendar = ({ value, lang, onChange, style }: ReactCalendarProps) => 
   }, [currentDay, currentMonth, currentYear, onChange]);
 
   return (
-    <div className="calendarContainer" style={style?.container}>
-      <div className="calendarHeader">
-        <div className="calendarDateDiv">
-          <button disabled={showMonths || showYears} onClick={goToPrevYear} className="arrowButton" type="button">
+    <div className={`${className}-container`} style={style?.container}>
+      <div className={`${className}-header`}>
+        <div className={`${className}-month-year-header`}>
+          <button disabled={showMonths || showYears} onClick={goToPrevYear} className={`${className}-arrow-button`} type="button">
             <img src={chevronLeft} alt="Go to prev year" />
           </button>
-          <button onClick={() => showMonthOrYear('year')} className="dateButton" type="button">{currentYear}</button>
-          <button disabled={showMonths || showYears} onClick={goToNextYear} className="arrowButton" type="button">
+          <button onClick={() => showMonthOrYear('year')} className={`${className}-month-year-button`} type="button">{currentYear}</button>
+          <button disabled={showMonths || showYears} onClick={goToNextYear} className={`${className}-arrow-button`} type="button">
             <img src={chevronRight} alt="Go to next year" />
           </button>
         </div>
-        <div className="calendarDateDiv">
-          <button disabled={showMonths || showYears} onClick={goToPrevMonth} className="arrowButton" type="button">
+        <div className={`${className}-month-year-header`}>
+          <button disabled={showMonths || showYears} onClick={goToPrevMonth} className={`${className}-arrow-button`} type="button">
             <img src={chevronLeft} alt="Go to prev month" />
           </button>
-          <button onClick={() => showMonthOrYear('month')} className="dateButton" type="button">{months[`${selectedLang}`][currentMonth]}</button>
-          <button disabled={showMonths || showYears} onClick={goToNextMonth} className="arrowButton" type="button">
+          <button onClick={() => showMonthOrYear('month')} className={`${className}-month-year-button`} type="button">{months[`${selectedLang}`][currentMonth]}</button>
+          <button disabled={showMonths || showYears} onClick={goToNextMonth} className={`${className}-arrow-button`} type="button">
           <img src={chevronRight} alt="Go to next month" />
           </button>
         </div>
       </div>
-      <div className="calendarContent">
+      <div className={`${className}-content`}>
         {showMonths && !showYears && (
-          <div className="dateOptionsGrid">
+          <div className={`${className}-month-year-grid`}>
             {
               months[`${selectedLang}`].map((month, index) => (
-                <button onClick={() => selectDate('month', index)} key={month} className="dateOption">{month.substring(0, 3)}</button>
+                <button onClick={() => selectDate('month', index)} key={month} className={`${className}-month-year-grid-button`}>{month.substring(0, 3)}</button>
               ))
             }
           </div>
         )}
         {showYears && !showMonths && (
-          <div className="dateOptionsGrid">
+          <div className={`${className}-month-year-grid`}>
             {
               yearsToShow.map((year: number) => (
-                <button onClick={() => selectDate('year', year)} key={year} className="dateOption">{year}</button>
+                <button onClick={() => selectDate('year', year)} key={year} className={`${className}-month-year-grid-button`}>{year}</button>
               ))
             }
           </div>
         )}
         {!showMonths && !showYears && (
           <>
-            <div className="weekDaysGrid">
+            <div className={`${className}-week-days-grid`}>
               {weekDays[`${selectedLang}`].map((day: string, index: number) => (
-                <div key={index} className="weekDay">{day}</div>
+                <div key={index} className={`${className}-week-day`}>{day}</div>
               ))}
             </div>
-            <div className="monthDaysGrid">
+            <div className={`${className}-month-days-grid`}>
               {prevMonthDays.map((day: number, index: number) => (
-                <button onClick={() => handleChangeDay('prev', day)} key={index} className="monthDay" type="button">{formatMonthDay(day)}</button>
+                <button onClick={() => handleChangeDay('prev', day)} key={index} className={`${className}-month-day`} type="button">{formatMonthDay(day)}</button>
               ))}
               {currentMonthDays.map((day: number, index: number) => {
                 if(day === currentDay) {
                   return (
-                    <button onClick={() => handleChangeDay('current', day)} key={index} className="monthDay currentDay" type="button">{formatMonthDay(day)}</button>
+                    <button onClick={() => handleChangeDay('current', day)} key={index} className={`${className}-month-day ${className}-current-day`} type="button">{formatMonthDay(day)}</button>
                   );
                 }
                 return (
-                  <button onClick={() => handleChangeDay('current', day)} key={index} className="monthDay currentMonthDay" type="button">{formatMonthDay(day)}</button>
+                  <button onClick={() => handleChangeDay('current', day)} key={index} className={`${className}-month-day ${className}-current-month-days`} type="button">{formatMonthDay(day)}</button>
                 );
               })}
               {nextMonthDays.map((day: number, index: number) => (
-                <button onClick={() => handleChangeDay('next', day)} key={index} className="monthDay" type="button">{formatMonthDay(day)}</button>
+                <button onClick={() => handleChangeDay('next', day)} key={index} className={`${className}-month-day`} type="button">{formatMonthDay(day)}</button>
               ))}
             </div>
           </>
